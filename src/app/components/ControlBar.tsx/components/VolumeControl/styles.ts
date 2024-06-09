@@ -1,4 +1,5 @@
 import { grayscale } from "@/app/styles/colors";
+import styled from "styled-components";
 
 export const SliderStyle = {
   width: '120px',
@@ -13,8 +14,8 @@ export const SliderStyle = {
 
   // bolinha 
   '& .MuiSlider-thumb': {
-    width: 16,
-    height: 16,
+    width: 12,
+    height: 12,
     backgroundColor: `${grayscale[100]}`,
     transition: 'all 0.1s',
 
@@ -26,8 +27,8 @@ export const SliderStyle = {
     // estados de utilização da bolinha
     '&:hover, &.Mui-active': {
       boxShadow: '0 0px 10px white',
-      width: 20,
-      height: 20,
+      width: 18,
+      height: 18,
     },
 
     '&.Mui-focusVisible': {
@@ -35,3 +36,14 @@ export const SliderStyle = {
     }
   }
 }
+
+export const DivPrincipal = styled.div`
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  width: fit-content;
+
+  .icon{
+    margin-left: 8px
+  }
+`

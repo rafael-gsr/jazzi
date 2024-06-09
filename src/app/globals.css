@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import @fontsource-variable;
-@import @fontsource-variable/josefin-sans;
-@import @fontsource/anonymous-pro;
+@import "@fontsource-variable/josefin-sans";
+@import "@fontsource/anonymous-pro";
 
 :root {
   --foreground-rgb: 0, 0, 0;

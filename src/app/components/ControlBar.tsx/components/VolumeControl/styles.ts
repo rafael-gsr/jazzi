@@ -44,6 +44,7 @@ export const DivPrincipal = styled.div`
   width: fit-content;
 
   .icon{
-    margin-left: 8px
+    margin-left: 8px;
+    cursor: pointer;
   }
 `

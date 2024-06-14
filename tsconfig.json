@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/ControlBar", "src/app/components/ControlBar/components/MusicTimeSlider", "src/app/componsrc/app/components/ControlBar/components/VolumeControlCommands", "src/app/components/VolumeControl"],
   "exclude": ["node_modules"]
 }

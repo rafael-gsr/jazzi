@@ -9,14 +9,14 @@ export const SliderStyle = {
   
   // cor do que já foi assistido
   '& .MuiSlider-track': {
-    border: `2px solid ${grayscale[100]}`,
+    border: '2px solid white',
   },
 
   // bolinha 
   '& .MuiSlider-thumb': {
     width: 12,
     height: 12,
-    backgroundColor: `${grayscale[100]}`,
+    backgroundColor: 'white',
     transition: 'all 0.1s',
 
     // sombra em volta da bolinha

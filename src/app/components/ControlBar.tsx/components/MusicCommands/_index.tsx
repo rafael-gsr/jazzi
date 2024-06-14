@@ -6,7 +6,7 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
 import * as S from './styles'
 import { useState } from 'react'
-import { grayscale } from '@/app/styles/colors'
+import { darkBlue } from '@/app/styles/colors'
 
 const MusicCommands = () => {
   const playlistLenght = 15
@@ -42,7 +42,7 @@ const MusicCommands = () => {
       <SkipPreviousIcon
         className='icon'
         onClick={() => handleNextAndPrev('prev')}
-        sx={playlistPos === 0 ? { color: grayscale[100] } : { color: 'white' }}
+        sx={playlistPos === 0 ? { color: darkBlue[100] } : { color: 'white' }}
       />
       {paused ? (
         <PlayArrowIcon
@@ -60,7 +60,7 @@ const MusicCommands = () => {
         onClick={() => handleNextAndPrev('next')}
         sx={
           playlistPos === playlistLenght
-            ? { color: grayscale[100] }
+            ? { color: darkBlue[100]  }
             : { color: 'white' }
         }
       />

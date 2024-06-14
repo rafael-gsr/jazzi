@@ -1,4 +1,4 @@
-import ControlBar from "./components/ControlBar.tsx/_index"
+import ControlBar from "./components/ControlBar/_index"
 
 const Index = () => {
   return (

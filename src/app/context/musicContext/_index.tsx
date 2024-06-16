@@ -1,9 +1,11 @@
-import { ContextType, createContext, PropsWithChildren, ReactNode, useContext, useState } from "react";
+'use client'
+
+import { createContext, useContext, useState } from "react";
 import * as Types from './types'
 
 const MusicContext = createContext({})
 
-export const MusicContextProvider = ({children}: PropsWithChildren<ReactNode> ) => {
+export const MusicContextProvider = ({children}: Types.IMusicContextProvider ) => {
   const [ playlist, setPlaylist ] = useState<Types.Playlist>([])
   const [ playlistPos, setPlaylistPos ] = useState<number>(0)
 

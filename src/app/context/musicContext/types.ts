@@ -1,3 +1,5 @@
+import React from "react";
+
 export type MusicContextProps = {
   title: string;
   author: string;
@@ -6,3 +8,7 @@ export type MusicContextProps = {
 }
 
 export type Playlist = MusicContextProps[]
+
+export type IMusicContextProvider = {
+  children: React.ReactNode;
+}

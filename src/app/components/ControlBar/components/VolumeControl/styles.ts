@@ -1,8 +1,7 @@
-import { grayscale } from "@/app/styles/colors";
 import styled from "styled-components";
 
 export const SliderStyle = {
-  width: '120px',
+  width: '60%',
 
   // cor da linha
   color:'white',
@@ -40,9 +39,10 @@ export const SliderStyle = {
 export const DivPrincipal = styled.div`
   display: flex;
   flex-direction: row; 
+  justify-content: flex-end;
   align-items: center;
-  width: fit-content;
-
+  width: 20%;
+  
   .icon{
     width: 24px;
     height: 24px;

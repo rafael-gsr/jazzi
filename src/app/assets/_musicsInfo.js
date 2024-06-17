@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react"
-
 import cheekToCheek from './music/cheek-to-cheek.luis-armstrong-and-ella-fitzgerald.mp3'
 import cheekToCheekThumb from './music/cheek-to-cheek.luis-armstrong-and-ella-fitzgerald.mp3.webp'
 
@@ -39,77 +37,135 @@ import whenIFallInLoveThumb from './music/when-i-fall-in-love.nat-king-cole.mp3.
 // AudioRef.current.play()
 // AudioRef.current.pause()
 // AudioRef.current.ontimeupdate
-  
-export const Musics = {
-  cheekToCheek:{
+
+const Authors = {
+  frankSinatra: 'Frank Sinatra',
+  rayCharles: 'Ray Charles',
+  natKingCole: 'Nat King Cole',
+  louisArmstrong: 'Louis Armstrong',
+  snarkyPuppy: 'Snarky Puppy',
+  benEKing: 'Ben E. King',
+  daveBrubek: 'Dave Brubeck',
+}
+
+const Musics = [
+  {
     title: 'Cheek to cheek',
-    author: 'Louis Armstrong and Ella Fitzgerald',
+    author: `${Authors.louisArmstrong} and Ella Fitzgerald`,
     archive: cheekToCheek,
     thumb: cheekToCheekThumb,
   },
-  flyMeToTheMoon:{
+  {
     title: 'Fly me to the moon',
-    author: 'Frank Sinatra',
+    author: Authors.frankSinatra,
     archive: flyMeToTheMoon,
     thumb: flyMeToTheMoonThumb,
   },
-  hitTheRoadJack:{
+  {
     title: 'Hit the road jack',
-    author: 'Ray Charles',
+    author: Authors.rayCharles,
     archive: hitTheRoadJack,
     thumb: hitTheRoadJackThumb,
   },
-  iLoveYouBaby:{
+  {
     title: 'I love you baby',
-    author: 'Frank Sinatra',
+    author: Authors.frankSinatra,
     archive: iLoveYouBaby,
     thumb: iLoveYouBabyThumb,
   },
-  love:{
+  {
     title: 'L-O-V-E',
-    author: 'Nat King Cole',
+    author: Authors.natKingCole,
     archive: love,
     thumb: loveThumb,
   },
-  laVieEnRose:{
+  {
     title: 'La vie en rose',
-    author: 'Louis Armstrong',
+    author: Authors.louisArmstrong,
     archive: laVieEnRose,
     thumb: laVieEnRoseThumb,
   },
-  lingus:{
+  {
     title: 'Lingus',
-    author: 'Snarky Puppy',
+    author: Authors.snarkyPuppy,
     archive: lingus,
     thumb: lingusThumb,
   },
-  standByMe:{
+  {
     title: 'Stand by me',
-    author: 'Ben E. King',
+    author: Authors.benEKing,
     archive: standByMe,
     thumb: standByMeThumb,
   },
-  takeFive:{
+  {
     title: 'Take five',
-    author: 'Dabe Brubeck',
+    author: Authors.daveBrubek,
     archive: takeFive,
     thumb: takeFiveThumb,
   },
-  whatAWonderfulWorld:{
+  {
     title: 'What a wonderful world',
-    author: 'Louis Armstrong',
+    author: Authors.louisArmstrong,
     archive: whatAWonderfulWorld,
     thumb: whatAWonderfulWorldThumb,
   },
-  whenIFallInLove:{
+  {
     title: 'When I fall in love',
-    author: 'Nat King Cole',
+    author: Authors.natKingCole,
     archive: whenIFallInLove,
     thumb: whenIFallInLoveThumb,
-  },  
+  },
+]
+
+function generateRandomPlaylists(motherPlaylist, length) {
+  const createdPlaylist = []
+  var usedLength = length
+  
+  if (length >= motherPlaylist.length) {
+    usedLength = motherPlaylist.length
+  }
+  
+  for (var i = 0; i < usedLength; i++) {
+    var randomElement =
+    motherPlaylist[Math.floor(Math.random() * motherPlaylist.length)]
+    
+    while (createdPlaylist.includes(randomElement)) {
+      randomElement =
+      motherPlaylist[Math.floor(Math.random() * motherPlaylist.length)]
+    }
+    createdPlaylist.push(randomElement)
+  }
+  
+  return createdPlaylist
 }
 
+function generatePlaylistByAuthor(motherPlaylist, author) {
+  const createdPlaylist = motherPlaylist.filter((item) => {
+    return item.author === author
+  })
+  
+  return createdPlaylist
+}
 
-export function logMusics(){
-  console.log(Musics)
+export const Playlists = [
+  {
+    title: 'Random (discover more musics)',
+    musics: generateRandomPlaylists(Musics, 100),
+  },
+  {
+    title: 'Best Of FrankSinatra',
+    musics: generatePlaylistByAuthor(Musics, Authors.frankSinatra),
+  },
+  {
+    title: 'Best of Louis Armstrong',
+    musics: generatePlaylistByAuthor(Musics, Authors.louisArmstrong),
+  },
+  {
+    title: 'Best of Nat King Cole',
+    musics: generatePlaylistByAuthor(Musics, Authors.natKingCole),
+  },
+]
+
+export function logMusics() {
+  console.log(Playlists)
 }

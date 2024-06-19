@@ -21,13 +21,13 @@ export const MusicContextProvider = ({children}: Types.IMusicContextProvider ) =
   )
 }
 
-export const useMusicContext = () => {
+export const useMusicContext = (): Types.IMusicContextHook => {
   const musicContext = useContext(MusicContext)
   if(!musicContext){
     throw new Error(
       "useMusicContext should be used with a MusicContextProvider"
     )
   }
-  return musicContext
+  return musicContext as Types.IMusicContextHook
 }
 

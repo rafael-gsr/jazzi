@@ -5,13 +5,13 @@ import VolumeControl from './components/VolumeControl/_index';
 import MusicCommands from './components/MusicCommands/_index';
 import MusicTimeSlider from './components/MusicTimeSlider/_index';
 import useWidth from '../../utils/useWidth/index';
+import PlayingMusic from './components/PlayingMusic/_index';
 
 const ControlBar = () => {
   const width = useWidth()
-  console.log(width)
-  
   return(
     <S.ContentHeader>
+      <PlayingMusic/>
       <div className='musicStatus'>
         <MusicCommands />
         <MusicTimeSlider />

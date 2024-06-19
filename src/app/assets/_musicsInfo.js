@@ -31,13 +31,6 @@ import whatAWonderfulWorldThumb from './music/what-a-wonderful-world.louis-armst
 import whenIFallInLove from './music/when-i-fall-in-love.nat-king-cole.mp3'
 import whenIFallInLoveThumb from './music/when-i-fall-in-love.nat-king-cole.mp3.webp'
 
-// AudioRef.current.duration
-// AudioRef.current.currentTime
-// AudioRef.current.volume "OBS: between 0 and 1"
-// AudioRef.current.play()
-// AudioRef.current.pause()
-// AudioRef.current.ontimeupdate
-
 const Authors = {
   frankSinatra: 'Frank Sinatra',
   rayCharles: 'Ray Charles',
@@ -166,6 +159,3 @@ export const Playlists = [
   },
 ]
 
-export function logMusics() {
-  console.log(Playlists)
-}

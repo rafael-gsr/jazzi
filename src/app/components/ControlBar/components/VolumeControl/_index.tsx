@@ -13,7 +13,6 @@ const VolumeControl = () => {
 
   function handleVolumeChange(data: any){
     setVolume(data.target.value)
-    console.log(data)
   }
 
   function handleSetMuted(){

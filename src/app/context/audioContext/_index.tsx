@@ -26,24 +26,23 @@ export const AudioContextProvider = ({ children }: Types.AudioContextProps) => {
   const { playlist, playlistPos } = useMusicContext()
   const audioRef = useRef<HTMLAudioElement>(null)
   const [audioState, setAudioState] = useState<Types.IAudioState>({
+    play: () => {},
+    pause: () => {},
     duration: 0,
-    volume: 1,
+    volume: 100,
+    muted: false,
+    paused: false,
   })
   const [currentTime, setCurrentTime] = useState<number>(0)
 
-  function handleAudioState(newState: Types.IAudioState) {
+  function handleAudioState(newState: Types.handleAudioStateProps) {
     setAudioState({
       ...audioState,
       ...newState,
     })
-  }
+  } 
 
-  function handleCurrentTime(time: number) {
-    if (audioRef.current) {
-      audioRef.current.currentTime = time
-      setCurrentTime(time)
-    }
-  }
+  console.log(audioRef)
 
   useEffect(() => {
     if (audioRef.current) {
@@ -51,22 +50,61 @@ export const AudioContextProvider = ({ children }: Types.AudioContextProps) => {
         setCurrentTime(value.target.currentTime)
       audioRef.current.onloadedmetadata = () =>
         handleAudioState({
-          play: audioRef.current.play,
-          pause: audioRef.current.pause,
-          duration: audioRef.current.duration,
-          volume: audioRef.current.volume,
+          play: audioRef.current?.play.bind(audioRef.current) as () => void,
+          pause: audioRef.current?.pause.bind(audioRef.current) as () => void,
+          duration: audioRef.current?.duration as number,
+          volume: audioRef.current?.volume as number * 100,
+          muted: audioRef.current?.muted,
+          paused: audioRef.current?.paused,
         })
     }
   }, [playlistPos])
 
+  const functions = { 
+    handlePlayPause: (toPause?: boolean) => {
+      if (`${toPause}` === 'false' || `${toPause}` === 'true' ){
+        toPause ? audioState.pause() : audioState.play()
+        handleAudioState({paused: toPause})
+        return
+      }
+      audioState.paused ? audioState.play() : audioState.pause()
+      handleAudioState({paused: !audioState.paused})
+    },
+    handleMuted: (muted: boolean) => {
+      if (audioRef.current){
+        audioRef.current.muted = muted
+        handleAudioState({ muted: muted})
+      }
+    },
+    handleVolume: (volume: number) => {
+      if (audioRef.current) {
+        audioRef.current.volume = volume / 100
+        handleAudioState({ volume: volume})
+      }
+    },
+    handleCurrentTime: (time: number) => {
+      if (audioRef.current) {
+        audioRef.current.currentTime = time
+        setCurrentTime(time)
+      }
+    }
+  }
+
+  const values = {
+    duration: audioState.duration,
+    muted: audioState.muted,
+    volume: audioState.volume,
+    currentTime: currentTime,
+    paused: audioState.paused
+  }
+
+
   return (
     <AudioContext.Provider
-      value={{
-        audioState,
-        handleAudioState,
-        currentTime,
-        handleCurrentTime,
-      }}
+      value={[
+        values,
+        functions,
+      ]}
     >
       <audio
         src={playlist[playlistPos] ? playlist[playlistPos].archive : ''}

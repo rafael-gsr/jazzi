@@ -5,15 +5,35 @@ export type AudioContextProps = {
 }
 
 export type IAudioState = {
-  play?: () => void;
-  pause?: () => void;
+  play: () => void;
+  pause: () => void;
   duration: number;
   volume: number;
+  muted: boolean;
+  paused: boolean;
 }
 
-export type IUseAudioState = {
-  audioState: IAudioState;
-  handleAudioState: (value: IAudioState) => void;
-  currentTime: number;
-  handleCurrentTime: (value:number) => void;
+export type handleAudioStateProps = {
+  play?: () => void;
+  pause?: () => void;
+  duration?: any;
+  volume?: any;
+  muted?: boolean;
+  paused?: boolean
 }
+
+export type IUseAudioState = [
+  {
+    duration: number;
+    muted: boolean;
+    volume: number;
+    currentTime: number;
+    paused: boolean;
+  },
+  {
+    handlePlayPause: (toPause?: boolean ) => void
+    handleMuted: (muted: boolean) => void;
+    handleVolume: (volume: number) => void;
+    handleCurrentTime: (time: number) => void;
+  },
+]

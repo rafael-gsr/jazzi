@@ -7,30 +7,26 @@ import SkipNextIcon from '@mui/icons-material/SkipNext'
 import * as S from './styles'
 import { useState } from 'react'
 import { darkBlue } from '@/app/styles/colors'
+import { useAudioContext } from '@/app/context/audioContext/_index'
 
 const MusicCommands = () => {
   const playlistLenght = 15
-
-  const [paused, setPaused] = useState<boolean>(true)
+  const [ audioConValues, audioConFunctions ] = useAudioContext()
   const [playlistPos, setPlaylistPos] = useState<number>(0)
-
-  function handleOnPause() {
-    setPaused(!paused)
-  }
 
   function handleNextAndPrev(nextOrPrev: 'next' | 'prev') {
     switch (nextOrPrev) {
       case 'next':
         if (playlistPos < playlistLenght) {
           setPlaylistPos(playlistPos + 1)
-          setPaused(false)
+          audioConFunctions.handlePlayPause(false)
           return
         }
         break
       case 'prev':
         if (playlistPos > 0) {
           setPlaylistPos(playlistPos - 1)
-          setPaused(false)
+          audioConFunctions.handlePlayPause(false)
           return
         }
         break
@@ -44,15 +40,15 @@ const MusicCommands = () => {
         onClick={() => handleNextAndPrev('prev')}
         sx={playlistPos === 0 ? { color: darkBlue[100] } : { color: 'white' }}
       />
-      {paused ? (
+      {audioConValues.paused ? (
         <PlayArrowIcon
           className='icon'
-          onClick={handleOnPause}
+          onClick={() => audioConFunctions.handlePlayPause()}
         />
       ) : (
         <PauseIcon
           className='icon'
-          onClick={handleOnPause}
+          onClick={() => audioConFunctions.handlePlayPause()}
         />
       )}
       <SkipNextIcon

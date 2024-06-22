@@ -8,7 +8,7 @@ export const ContentHeader = styled.section`
   width: 100%;
   min-width: 80px;
   height: fit-content;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   display: flex;
   justify-content: center;

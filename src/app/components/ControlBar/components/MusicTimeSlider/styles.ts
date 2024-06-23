@@ -43,4 +43,5 @@ export const SliderStyles = {
 
 export const Numbers = styled.p`
   margin: 0 16px;
+  width: 10%;
 `

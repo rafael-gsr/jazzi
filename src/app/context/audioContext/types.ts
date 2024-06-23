@@ -27,13 +27,13 @@ export type IUseAudioState = [
     duration: number;
     muted: boolean;
     volume: number;
-    currentTime: number;
     paused: boolean;
+    currentTime: number;
   },
   {
     handlePlayPause: (toPause?: boolean ) => void
     handleMuted: (muted: boolean) => void;
     handleVolume: (volume: number) => void;
-    handleCurrentTime: (time: number) => void;
+    handleCurrentTime: (time: number, onlyVisual?: boolean) => void;
   },
 ]

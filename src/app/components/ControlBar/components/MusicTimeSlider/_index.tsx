@@ -2,6 +2,7 @@ import { Slider, SliderTypeMap } from "@mui/material"
 import * as S from './styles'
 import { useAudioContext } from "@/app/context/audioContext/_index"
 import { useMusicContext } from "@/app/context/musicContext/_index"
+import { SyntheticEvent } from "react"
 
 const MusicTimeSlider = () => {
   const [ values, functions ] = useAudioContext()
@@ -23,11 +24,13 @@ const MusicTimeSlider = () => {
     return `${aditionalZero(minutes)}${minutes}:${aditionalZero(seconds)}${seconds}`
   }
 
-  function handleTimeChange(
-    event: Event,
-    value: number | number[],
-  ){
+  function handleTimeCommitted( event: Event | SyntheticEvent, value: number | number[],){
+    console.log(event)
     functions.handleCurrentTime(value as number)
+  }
+
+  function handleTimeVisual(event: Event, value: number | number[]){
+    functions.handleCurrentTime(value as number, true)
   }
 
   // console.log(values)
@@ -45,11 +48,13 @@ const MusicTimeSlider = () => {
     <S.Wrapper>
       {listenedTime}
       <Slider
+        onChangeCommitted={handleTimeCommitted}
         aria-label="Music Time Slider"
-        value={values.currentTime}
-        onChange={handleTimeChange}
+        value={(values.currentTime)}
+        onChange={handleTimeVisual}
         max={values.duration}
         sx={S.SliderStyles}
+        
       />
       {restantTime}
     </S.Wrapper>

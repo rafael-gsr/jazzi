@@ -42,8 +42,6 @@ export const AudioContextProvider = ({ children }: Types.AudioContextProps) => {
     })
   } 
 
-  console.log(audioRef)
-
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.ontimeupdate = (value: any) =>
@@ -82,10 +80,16 @@ export const AudioContextProvider = ({ children }: Types.AudioContextProps) => {
         handleAudioState({ volume: volume})
       }
     },
-    handleCurrentTime: (time: number) => {
-      if (audioRef.current) {
-        audioRef.current.currentTime = time
+    handleCurrentTime: (time: number, onlyVisual?: boolean) => {
+      if (onlyVisual){
+        !audioState.paused && functions.handlePlayPause(true)
         setCurrentTime(time)
+        return
+      }
+      if (audioRef.current) {
+        setCurrentTime(time)
+        audioRef.current.currentTime = time
+        audioState.paused && functions.handlePlayPause(false)
       }
     }
   }
@@ -94,8 +98,8 @@ export const AudioContextProvider = ({ children }: Types.AudioContextProps) => {
     duration: audioState.duration,
     muted: audioState.muted,
     volume: audioState.volume,
-    currentTime: currentTime,
-    paused: audioState.paused
+    paused: audioState.paused,
+    currentTime,
   }
 
 
@@ -109,6 +113,7 @@ export const AudioContextProvider = ({ children }: Types.AudioContextProps) => {
       <audio
         src={playlist[playlistPos] ? playlist[playlistPos].archive : ''}
         ref={audioRef}
+        
       />
       {children}
     </AudioContext.Provider>

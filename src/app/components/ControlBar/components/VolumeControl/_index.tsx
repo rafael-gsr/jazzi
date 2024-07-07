@@ -5,17 +5,15 @@ import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import { Slider } from "@mui/material";
 import * as S from './styles'
-import { useAudioContext } from "@/app/context/audioContext/_index";
 
-const VolumeControl = () => {
-  const [ values, functions ] = useAudioContext()
+const VolumeControl = ({handleMuted, handleVolume, volume, muted}:any) => {
 
   function handleVolumeChange(data: any){
-    functions.handleVolume(data.target.value)
+    handleVolume(data.target.value)
   }
 
   function handleSetMuted(){
-    functions.handleMuted(!values.muted)
+    handleMuted(!muted)
   }
 
   function handleOnMute(muted: boolean, originalVolume: number){
@@ -45,14 +43,14 @@ const VolumeControl = () => {
     <S.DivPrincipal>
       <Slider
         aria-label="Volume Control"
-        value={handleOnMute(values.muted, values.volume)}
+        value={handleOnMute(muted, volume)}
         valueLabelDisplay='auto'
         onChange={handleVolumeChange}
         sx={S.SliderStyle}
         max={100}
       />
 
-      {switchVolumeIcon(values.muted, values.volume)}
+      {switchVolumeIcon(muted, volume)}
     </S.DivPrincipal>
   )
 }

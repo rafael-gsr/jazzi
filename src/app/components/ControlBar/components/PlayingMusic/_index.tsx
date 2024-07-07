@@ -3,10 +3,10 @@ import * as S from './styles'
 import { Playlists } from '@/app/assets/_musicsInfo'
 
 const PlayingMusic = () => {
-  const { playlist, setPlaylist, setPlaylistPos } = useMusicContext()
+  const [musicState, dispatchMusicState] = useMusicContext()
 
-  setPlaylist(Playlists[1].musics)
-  setPlaylistPos(1)
+  dispatchMusicState({type:'SETPLAYLIST', payload: Playlists[1].musics})
+  // handlePlaylistPos(1)
   return(
     <S.ContentWrapper>
     </S.ContentWrapper>

@@ -1,3 +1,5 @@
+'use client'
+
 import styled from "styled-components";
 
 export const SliderStyle = {
@@ -37,6 +39,7 @@ export const SliderStyle = {
 }
 
 export const DivPrincipal = styled.div`
+  color: white;
   display: flex;
   flex-direction: row; 
   justify-content: flex-end;

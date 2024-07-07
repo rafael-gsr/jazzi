@@ -1,9 +1,10 @@
 'use client'
+
 import { yellow } from '../../styles/colors';
 import styled from "styled-components";
 import { breakpoints } from '../../styles/breakpoints';
 
-export const ContentHeader = styled.section`
+export const ContentWrapper = styled.section`
   background-color: ${yellow.default};
   width: 100%;
   min-width: 80px;
@@ -17,7 +18,7 @@ export const ContentHeader = styled.section`
     justify-content: space-between;
   }
   
-  .musicStatus{
+  .control__bar__playlist__controls{
     display:flex;
     flex-direction: column;
     align-items: center;

@@ -3,21 +3,27 @@ import * as S from './styles'
 import Image from 'next/image'
 
 const MusicInfos = () => {
-  const { playlist, playlistPos } = useMusicContext()
-  const currentMusic = playlist[playlistPos]
+  const [ musicState ] = useMusicContext()
+  const currentMusic = musicState.playlist[musicState.playlistPos]
 
   return (
-    <S.ContentWrapper>
-      <Image
-        alt={`${currentMusic.title} thumbnail`}
-        src={currentMusic.thumb}
-        className='thumb'
-      />
-      <S.TextDiv>
-        <S.Title>{currentMusic.title}</S.Title>
-        <S.ArtistName>{currentMusic.author}</S.ArtistName>
-      </S.TextDiv> 
-    </S.ContentWrapper>
+    <>
+      { 
+        currentMusic && (
+          <S.ContentWrapper>
+            <Image
+              alt={`${currentMusic.title} thumbnail`}
+              src={currentMusic.thumb}
+              className='thumb'
+              />
+            <S.TextDiv>
+              <S.Title>{currentMusic.title}</S.Title>
+              <S.ArtistName>{currentMusic.author}</S.ArtistName>
+            </S.TextDiv> 
+          </S.ContentWrapper>
+        )
+      }
+    </>
   )
 }
 

@@ -113,22 +113,22 @@ const Musics = [
 function generateRandomPlaylists(motherPlaylist, length) {
   const createdPlaylist = []
   var usedLength = length
-  
+
   if (length >= motherPlaylist.length) {
     usedLength = motherPlaylist.length
   }
-  
+
   for (var i = 0; i < usedLength; i++) {
     var randomElement =
-    motherPlaylist[Math.floor(Math.random() * motherPlaylist.length)]
-    
+      motherPlaylist[Math.floor(Math.random() * motherPlaylist.length)]
+
     while (createdPlaylist.includes(randomElement)) {
       randomElement =
-      motherPlaylist[Math.floor(Math.random() * motherPlaylist.length)]
+        motherPlaylist[Math.floor(Math.random() * motherPlaylist.length)]
     }
     createdPlaylist.push(randomElement)
   }
-  
+
   return createdPlaylist
 }
 
@@ -136,26 +136,56 @@ function generatePlaylistByAuthor(motherPlaylist, author) {
   const createdPlaylist = motherPlaylist.filter((item) => {
     return item.author === author
   })
-  
+
   return createdPlaylist
 }
 
-export const Playlists = [
-  {
-    title: 'Random (discover more musics)',
-    musics: generateRandomPlaylists(Musics, 100),
-  },
-  {
-    title: 'Best Of FrankSinatra',
-    musics: generatePlaylistByAuthor(Musics, Authors.frankSinatra),
-  },
-  {
-    title: 'Best of Louis Armstrong',
-    musics: generatePlaylistByAuthor(Musics, Authors.louisArmstrong),
-  },
-  {
-    title: 'Best of Nat King Cole',
-    musics: generatePlaylistByAuthor(Musics, Authors.natKingCole),
-  },
-]
-
+export const Playlists = {
+  byAuthor: [
+    {
+      title: 'Best Of FrankSinatra',
+      musics: generatePlaylistByAuthor(Musics, Authors.frankSinatra),
+    },
+    {
+      title: 'Best of Louis Armstrong',
+      musics: generatePlaylistByAuthor(Musics, Authors.louisArmstrong),
+    },
+    {
+      title: 'Best of Nat King Cole',
+      musics: generatePlaylistByAuthor(Musics, Authors.natKingCole),
+    },
+    {
+      title: 'Best of Ray Charles',
+      musics: generatePlaylistByAuthor(Musics, Authors.rayCharles),
+    },
+    {
+      title: 'Best of Snarky Puppy',
+      musics: generatePlaylistByAuthor(Musics, Authors.snarkyPuppy),
+    },
+    {
+      title: 'Best of Ben E. King',
+      musics: generatePlaylistByAuthor(Musics, Authors.benEKing),
+    },
+    {
+      title: 'Best of Dave Brubek',
+      musics: generatePlaylistByAuthor(Musics, Authors.daveBrubek),
+    },
+  ],
+  random: [
+    {
+      title: 'Random (discover more musics)',
+      musics: generateRandomPlaylists(Musics, 100),
+    },
+  ],
+  allMusics: Musics.map((music) => {
+    return {
+      title: music.title,
+      musics: [ {
+        title: music.title,
+        author: music.author,
+        archive: music.archive,
+        thumb: music.thumb,
+      },],
+    }
+  })
+}

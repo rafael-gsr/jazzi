@@ -1,15 +1,17 @@
-'use client'
 import React from "react"
 
 function useWidth () {
   const [ currentWidth, setCurrentWidth ] = React.useState(360)
 
-  function handleCurrentWidth(event){
+  const handleCurrentWidth = (event) => {
     setCurrentWidth(event.currentTarget.innerWidth)
   }
 
-  window.onresize = handleCurrentWidth
-  window.onload = handleCurrentWidth
+  React.useEffect(() => {
+    window.onresize = handleCurrentWidth
+    window.onload = handleCurrentWidth
+    setCurrentWidth(window.innerWidth)
+  }, [])
 
   return currentWidth
 }

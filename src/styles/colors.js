@@ -13,6 +13,7 @@ export const yellow = {
 
 export const darkBlue = {
   default: '#04293A',
+  deepBlue: '#00090c',
   900: '#00283A',
   800: '#05293A',
   700: '#082A3A',

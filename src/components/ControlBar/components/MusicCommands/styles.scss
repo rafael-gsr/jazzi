@@ -1,0 +1,15 @@
+@import '@/styles/__colors';
+
+.music_commands{
+  color: white;
+  display: flex;
+  justify-content: center;
+  
+  &__icon{
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    color: $dark-blue-100;
+  }
+  
+}

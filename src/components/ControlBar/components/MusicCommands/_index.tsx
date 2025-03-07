@@ -1,12 +1,10 @@
-'use client'
-
 import PauseIcon from '@mui/icons-material/Pause'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
 import SkipNextIcon from '@mui/icons-material/SkipNext'
-import * as S from './styles'
-import { darkBlue } from '@/app/styles/colors'
-import { useMusicContext } from '@/app/context/musicContext/_index'
+import { darkBlue } from '@/styles/colors'
+import { useMusicContext } from '@/context/musicContext/_index'
+import './styles.scss'
 
 type musicCommandsProps = {
   paused: boolean;
@@ -17,25 +15,25 @@ const MusicCommands = ({paused, handlePlayPause}: musicCommandsProps) => {
   const [ musicState, dispatchMusicState ] = useMusicContext()
 
   return (
-    <S.DivPrincipal>
+    <div className='music_comands'>
       <SkipPreviousIcon
-        className='icon'
+        className='music_commands__icon'
         onClick={() => dispatchMusicState ({ type: 'PREV'})}
         sx={ musicState.playlistPos === 0 ? { color: darkBlue[100] } : { color: 'white' }}
       />
       {paused ? (
         <PlayArrowIcon
-          className='icon'
+          className='music_commands__icon'
           onClick={() => handlePlayPause()}
         />
       ) : (
         <PauseIcon
-          className='icon'
+          className='music_commands__icon'
           onClick={() => handlePlayPause()}
         />
       )}
       <SkipNextIcon
-        className='icon'
+        className='music_commands__icon'
         onClick={() => dispatchMusicState ({type: 'NEXT'})}
         sx={
           musicState.playlistPos === musicState.playlist.length - 1
@@ -43,7 +41,7 @@ const MusicCommands = ({paused, handlePlayPause}: musicCommandsProps) => {
             : { color: 'white' }
         }
       />
-    </S.DivPrincipal>
+    </div>
   )
 }
 

@@ -1,14 +1,14 @@
 import { Slider, SliderTypeMap } from "@mui/material"
-import * as S from './styles'
+import './styles.scss'
 import { SyntheticEvent } from "react"
 
 type MusicTimeSliderProps = {
   duration:number,
   currentTime:number,
-  handleCurrentTime: (time?: number, onlyVisual?: boolean ) => void,
+  handleCurrentTime: (time: number, onlyVisual?: boolean ) => void,
 }
 
-const MusicTimeSlider = ({duration, currentTime, handleCurrentTime}: any) => {
+const MusicTimeSlider = ({duration, currentTime, handleCurrentTime}: MusicTimeSliderProps) => {
 
   function parseToMinSec(value: number): string {
     const minutes = parseInt(`${value / 60}`)
@@ -24,37 +24,35 @@ const MusicTimeSlider = ({duration, currentTime, handleCurrentTime}: any) => {
     return `${aditionalZero(minutes)}${minutes}:${aditionalZero(seconds)}${seconds}`
   }
 
-  function handleTimeCommitted( event: Event | SyntheticEvent, value: number | number[],){
-    console.log(event)
+  function handleTimeCommitted( event: Event | SyntheticEvent, value: number | number[]) {
+    console.log('time commited')
     handleCurrentTime(value as number)
   }
 
   function handleTimeVisual(event: Event, value: number | number[]){
+    console.log('time visual')
     handleCurrentTime(value as number, true)
   }
 
-  const restantTime = (
-    <S.Numbers>-{parseToMinSec((duration - currentTime))}</S.Numbers>
-  )
-
-  const listenedTime = (
-    <S.Numbers>{parseToMinSec(currentTime)}</S.Numbers>
-  )
-
   return(
-    <S.Wrapper>
-      {listenedTime}
+    <div className="time_slider">
+      <MusicTimeSlider.TimeCounter time={parseToMinSec(currentTime)} />
       <Slider
         onChangeCommitted={handleTimeCommitted}
         aria-label="Music Time Slider"
         value={(currentTime)}
         onChange={handleTimeVisual}
         max={duration}
-        sx={S.SliderStyles}
-        
+        className="time_slider__slider"
       />
-      {restantTime}
-    </S.Wrapper>
+      <MusicTimeSlider.TimeCounter time={parseToMinSec((duration - currentTime))}/>
+    </div>
+  )
+}
+
+MusicTimeSlider.TimeCounter = ({time}: {time: string}) => {
+  return(
+    <p className="time_counters">{time}</p>
   )
 }
 

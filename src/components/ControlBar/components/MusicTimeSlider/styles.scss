@@ -1,0 +1,56 @@
+@import '@/styles/__colors';
+@import '@/styles/__breakpoints';
+
+.time_slider {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+
+
+  &__slider {
+    width: 55%;
+
+    @media #{$breakpoint-lg} {
+      width: 100%;
+    }
+
+    color: 'white';
+
+    & .MuiSlider-track {
+      border: 2px solid $dark-blue-500;
+    }
+
+    & .MuiSlider-thumb {
+      width: 18;
+      height: 18;
+      background-color: $dark-blue-700;
+      transition: 'all 0.1s';
+
+      &::before {
+        box-shadow: 0 0px 2px $dark-blue-300;
+      }
+
+      &:hover,
+      &.Mui-active {
+        box-shadow: 0 1px 10px $dark-blue-300;
+        width: 24;
+        height: 24;
+      }
+
+      &.Mui-focusVisible {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.time_counters {
+  display: flex;
+  justify-content: center;
+  margin: 0 16px;
+  width: 15%;
+}

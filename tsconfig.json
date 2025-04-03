@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -18,9 +19,16 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@public/": ["./public/*"]
     }
   },
-  "include": ["declarations.d.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/ControlBar", "src/app/components/ControlBar/components/MusicTimeSlider", "src/app/componsrc/app/components/ControlBar/components/VolumeControlCommands", "src/app/components/VolumeControl"],
+  "include": [
+    "declarations.d.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+  ],
   "exclude": ["node_modules"]
 }

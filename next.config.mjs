@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
+  sassOptions:{
+    implementation: 'sass'
+  },
   webpack(config,options){
     const { isServer } = options
     config.module.rules.push({
@@ -15,7 +17,6 @@ const nextConfig = {
             publicPath: `${config.assetPrevfix}/_next/static/images/`,
             outputPath: `${isServer? '../' : ''}static/images/`,
             name: '[name]-[hash].[ext]',
-            // esModule: config.esModule || false,
           }
         }
       ,]

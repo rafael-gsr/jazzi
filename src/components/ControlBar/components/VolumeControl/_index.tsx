@@ -1,57 +1,44 @@
-'use client'
-
 import { VolumeMute, VolumeOff } from "@mui/icons-material";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import { Slider } from "@mui/material";
-import * as S from './styles'
+import './styles.scss'
 
 const VolumeControl = ({handleMuted, handleVolume, volume, muted}:any) => {
 
   function handleVolumeChange(data: any){
+    if (muted) handleMuted(!muted)
     handleVolume(data.target.value)
-  }
-
-  function handleSetMuted(){
-    handleMuted(!muted)
-  }
-
-  function handleOnMute(muted: boolean, originalVolume: number){
-    if(muted){
-      return 0
-    } else {
-      return originalVolume
-    }  
   }
 
   function switchVolumeIcon(muted: boolean, vol: number){
     switch (true){
       case muted:
-        return <VolumeOff onClick={handleSetMuted} className='icon' />
+        return <VolumeOff onClick={() => handleMuted(!muted)} className='icon' />
       case vol >= 66:
-        return <VolumeUp onClick={handleSetMuted} className='icon' />
+        return <VolumeUp onClick={() => handleMuted(!muted)} className='icon' />
       case vol >= 33:
-        return <VolumeDown onClick={handleSetMuted} className='icon' />
+        return <VolumeDown onClick={() => handleMuted(!muted)} className='icon' />
       case vol === 0:
-        return <VolumeOff onClick={handleSetMuted} className='icon' />
+        return <VolumeOff onClick={() => handleMuted(!muted)} className='icon' />
       default:
-        return <VolumeMute onClick={handleSetMuted} className='icon' />
+        return <VolumeMute onClick={() => handleMuted(!muted)} className='icon' />
     }
   }
   
   return(
-    <S.DivPrincipal>
+    <div className="volume_control">
       <Slider
         aria-label="Volume Control"
-        value={handleOnMute(muted, volume)}
+        value={muted ? 0 : volume}
         valueLabelDisplay='auto'
         onChange={handleVolumeChange}
-        sx={S.SliderStyle}
+        className="volume_control__slider"
         max={100}
       />
 
       {switchVolumeIcon(muted, volume)}
-    </S.DivPrincipal>
+    </div>
   )
 }
 

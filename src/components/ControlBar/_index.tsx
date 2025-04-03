@@ -9,25 +9,16 @@ import MusicInfos from './components/MusicInfos/_index'
 
 import { useEffect, useRef, useState } from 'react'
 import * as Types from './types'
-import { Playlists } from '@/assets/_musicsInfo'
 import { useMusicContext } from '@/context/musicContext/_index'
-import { debounce } from '@/utils/debounce'
 
 const ControlBar = () => {
   const width = useWidth()
   const [playlistState] = useMusicContext()
   const audioRef = useRef<HTMLAudioElement>(null)
   const [currentTime, setCurrentTime] = useState<number>(0)
-  const [pausing, setPausing] = useState<boolean>(false)
-  const [changingTime, setChangingTime] = useState<boolean>(false)
-  const [ showPlayer, setShowPlayer ] = useState<boolean>(false)
   const [audioState, setAudioState] = useState<Types.IAudioState>({
-    play: () => {},
-    pause: () => {},
     duration: 0,
     volume: 100,
-    muted: false,
-    paused: false,
   })
 
   function handleAudioState(newState: Types.handleAudioStateProps) {
@@ -45,56 +36,43 @@ const ControlBar = () => {
       audioRef.current.onloadedmetadata = () => {
         audioRef.current?.play()
         handleAudioState({
-          play: audioRef.current?.play.bind(audioRef.current),
-          pause: audioRef.current?.pause.bind(audioRef.current),
           duration: audioRef.current?.duration as number,
           volume: (audioRef.current?.volume as number) * 100,
-          muted: audioRef.current?.muted,
-          paused: audioRef.current?.paused,
         })
       }
-      setShowPlayer(true)
     }
   }, [playlistState.playlistPos])
 
-  function handlePlayPause(toPause?: boolean) {
-    function PlayMusic() {
-      if(!pausing && !changingTime){
-        setPausing(true)
-        audioState.play()
-        setPausing(false)
+  const handlePlayPause = (toPause?: boolean) => {
+    const PauseMusic = () => {
+      if (audioRef.current?.played) {
+        audioRef.current?.pause()
       }
     }
 
-    function PauseMusic() {
-      if(!pausing && !changingTime){
-        setPausing(true)
-        audioState.pause()
-        setPausing(false)
+    const PlayMusic = () => {
+      if (audioRef.current?.paused) {
+        audioRef.current?.play().catch(() => PlayMusic())
       }
     }
 
-    const debouncePlayPause = debounce(() => {
+    if (PauseMusic !== undefined || PlayMusic !== undefined) {
       if (toPause != undefined) {
-        handleAudioState({ paused: toPause })
         toPause
           ? PauseMusic()
           : PlayMusic()
+        return
       }
-    
-      handleAudioState({ paused: !audioState.paused })
-      audioState.paused
+      
+      audioRef.current?.paused
         ? PlayMusic()
         : PauseMusic()
-      }, 300, true)
-
-    debouncePlayPause()
+    }
   }
 
   function handleMuted(muted: boolean) {
     if (audioRef.current) {
       audioRef.current.muted = muted
-      handleAudioState({ muted: muted })
     }
   }
 
@@ -105,41 +83,32 @@ const ControlBar = () => {
     }
   }
 
-  function handleCurrentTime(time: number, onlyVisual?: boolean) {
-    function visualChange() {
-      if (!changingTime && !pausing) {
-        setChangingTime(true)
-        !audioState.paused && handlePlayPause(true)
+  function handleCurrentTime(time: number, type: Types.TimeBarInteractions) {
+    switch (type) {
+      case Types.TimeBarInteractions.START:
+        handlePlayPause(true)
+        break
+      case Types.TimeBarInteractions.MOVE:
         setCurrentTime(time)
-        setChangingTime(false)
-      }
-    }
-
-    function totalChange() {
-      if (!changingTime && !pausing) {
+        break
+      case Types.TimeBarInteractions.END: 
         if (audioRef.current) {
           audioRef.current.currentTime = time
         }
-        setCurrentTime(time)
-        setChangingTime(false)
-        audioState.paused && handlePlayPause(false)
-      }
+        handlePlayPause(false)
+        break
+      default: break
     }
-
-    const debounceTotalChange = debounce(totalChange, 100, false)
-    const debounceVisualChange = debounce(visualChange, 100, false)
-
-    if (onlyVisual) {
-      debounceVisualChange()
-      return
-    }
-    debounceTotalChange()
   }
 
   return (
     <>
       <section
-        className={playlistState.playlist[playlistState.playlistPos] ? 'control_bar' : 'hidden'}
+        className={
+          playlistState.playlist[playlistState.playlistPos]
+          ? 'control_bar'
+          : 'hidden'
+        }
       >
         <audio
           src={
@@ -151,7 +120,7 @@ const ControlBar = () => {
         {width >= 1024 && <MusicInfos />}
         <div className='control_bar__playlist__controls'>
           <MusicCommands
-            paused={audioState.paused}
+            paused={audioRef.current?.paused}
             handlePlayPause={handlePlayPause}
           />
           <MusicTimeSlider
@@ -162,7 +131,7 @@ const ControlBar = () => {
         </div>
         {width >= 1024 && (
           <VolumeControl
-            muted={audioState.muted}
+            muted={audioRef.current?.muted}
             volume={audioState.volume}
             handleVolume={handleVolume}
             handleMuted={handleMuted}

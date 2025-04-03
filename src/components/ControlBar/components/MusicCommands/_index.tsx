@@ -7,11 +7,11 @@ import { useMusicContext } from '@/context/musicContext/_index'
 import './styles.scss'
 
 type musicCommandsProps = {
-  paused: boolean;
+  paused: boolean | undefined;
   handlePlayPause: (isPaused?: boolean) => void
 }
 
-const MusicCommands = ({paused, handlePlayPause}: musicCommandsProps) => {
+const MusicCommands = ({paused = true, handlePlayPause}: musicCommandsProps) => {
   const [ musicState, dispatchMusicState ] = useMusicContext()
 
   return (

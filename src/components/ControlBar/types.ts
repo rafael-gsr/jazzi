@@ -5,21 +5,13 @@ export type AudioContextProps = {
 }
 
 export type IAudioState = {
-  play: () => void;
-  pause: () => void;
   duration: number;
   volume: number;
-  muted: boolean;
-  paused: boolean;
 }
 
 export type handleAudioStateProps = {
-  play?: () => void;
-  pause?: () => void;
   duration?: any;
   volume?: any;
-  muted?: boolean;
-  paused?: boolean
 }
 
 export type IUseAudioState = [
@@ -37,3 +29,21 @@ export type IUseAudioState = [
     handleCurrentTime: (time: number, onlyVisual?: boolean) => void;
   },
 ]
+
+export enum TouchStates {
+  START = 'touchstart',
+  MOVE = 'touchmove',
+  END = 'touchend',
+}
+
+export enum MouseStates {
+  START = 'mousedown',
+  MOVE = 'mousemove',
+  END = 'mouseup',
+}
+
+export enum TimeBarInteractions {
+  START = 'start',
+  MOVE = 'move',
+  END = 'end',
+}

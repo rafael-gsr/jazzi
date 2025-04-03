@@ -1,11 +1,12 @@
-import { Slider, SliderTypeMap } from "@mui/material"
+import { Slider } from "@mui/material"
 import './styles.scss'
 import { SyntheticEvent } from "react"
+import { TimeBarInteractions } from "../../types"
 
 type MusicTimeSliderProps = {
   duration:number,
   currentTime:number,
-  handleCurrentTime: (time: number, onlyVisual?: boolean ) => void,
+  handleCurrentTime: (time: number, type: TimeBarInteractions ) => void,
 }
 
 const MusicTimeSlider = ({duration, currentTime, handleCurrentTime}: MusicTimeSliderProps) => {
@@ -24,28 +25,27 @@ const MusicTimeSlider = ({duration, currentTime, handleCurrentTime}: MusicTimeSl
     return `${aditionalZero(minutes)}${minutes}:${aditionalZero(seconds)}${seconds}`
   }
 
-  function handleTimeCommitted( event: Event | SyntheticEvent, value: number | number[]) {
-    console.log('time commited')
-    handleCurrentTime(value as number)
-  }
-
-  function handleTimeVisual(event: Event, value: number | number[]){
-    console.log('time visual')
-    handleCurrentTime(value as number, true)
+  function handleTimeChange(event: Event | SyntheticEvent, value: number | number[]){
+    if (event.type === 'touchstart' || event.type === 'mousedown')
+      handleCurrentTime(value as number, TimeBarInteractions.START)
+    if (event.type === 'touchmove' || event.type === 'mousemove')
+      handleCurrentTime(value as number, TimeBarInteractions.MOVE)
+    if (event.type === 'touchend' || event.type === 'mouseup')
+      handleCurrentTime(value as number, TimeBarInteractions.END)
   }
 
   return(
     <div className="time_slider">
       <MusicTimeSlider.TimeCounter time={parseToMinSec(currentTime)} />
       <Slider
-        onChangeCommitted={handleTimeCommitted}
+        onChangeCommitted={handleTimeChange}
         aria-label="Music Time Slider"
         value={(currentTime)}
-        onChange={handleTimeVisual}
+        onChange={handleTimeChange}
         max={duration}
         className="time_slider__slider"
       />
-      <MusicTimeSlider.TimeCounter time={parseToMinSec((duration - currentTime))}/>
+      <MusicTimeSlider.TimeCounter time={parseToMinSec((duration))}/>
     </div>
   )
 }

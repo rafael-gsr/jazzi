@@ -1,13 +1,10 @@
-import ControlBar from "./components/ControlBar/_index"
-import { AudioContextProvider } from "./context/audioContext/_index"
-import { MusicContextProvider } from "./context/musicContext/_index"
+import { MusicContextProvider } from "@/context/musicContext/_index"
+import Home from './pages/index';
 
 const Index = () => {
   return (
     <MusicContextProvider>
-      <AudioContextProvider>
-        <ControlBar/>
-      </AudioContextProvider>
+      <Home />
     </MusicContextProvider>
   )
 }

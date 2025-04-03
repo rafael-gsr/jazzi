@@ -17,12 +17,14 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "next": "14.2.3",
+    "@swc/cli": "^0.6.0",
+    "@swc/core": "^1.10.18",
+    "@swc/helpers": "^0.5.15",
+    "keen-slider": "^6.8.6",
+    "next": "14.2.2",
     "react": "^18",
     "react-audio-player": "^0.17.0",
     "react-dom": "^18",
-    "styled-components": "^6.1.11",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
@@ -33,6 +35,7 @@
     "eslint-config-next": "14.2.3",
     "file-loader": "^6.2.0",
     "postcss": "^8",
+    "sass": "^1.77.8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

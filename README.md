@@ -22,3 +22,5 @@ Time progress bar:\
 ![time_progress_bar](./docs/time_control.png)\
 Thumbnail:\
 ![thumbnail_with_hover](./docs/thumbnail_hover.png)\
+Cards:\
+![musics_cads](./docs/musics_cards.png)

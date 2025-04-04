@@ -20,6 +20,7 @@ const ControlBar = () => {
     duration: 0,
     volume: 100,
   })
+  const [ muted, setMuted ] = useState<boolean>(false)
 
   function handleAudioState(newState: Types.handleAudioStateProps) {
     setAudioState({
@@ -72,6 +73,7 @@ const ControlBar = () => {
 
   function handleMuted(muted: boolean) {
     if (audioRef.current) {
+      setMuted(muted)
       audioRef.current.muted = muted
     }
   }
@@ -131,7 +133,7 @@ const ControlBar = () => {
         </div>
         {width >= 1024 && (
           <VolumeControl
-            muted={audioRef.current?.muted}
+            muted={muted}
             volume={audioState.volume}
             handleVolume={handleVolume}
             handleMuted={handleMuted}

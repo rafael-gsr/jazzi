@@ -7,7 +7,7 @@ import './styles.scss'
 const VolumeControl = ({handleMuted, handleVolume, volume, muted}:any) => {
 
   function handleVolumeChange(data: any){
-    if (muted) handleMuted(!muted)
+    if (muted) handleMuted(false)
     handleVolume(data.target.value)
   }
 

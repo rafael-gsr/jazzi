@@ -11,3 +11,6 @@ To control the audio player the react-audio-player is used, but the commands of 
 
 Images of the application:
 ![1920_image](./docs/print_1920.png)
+![volume_control](./docs/volume_control.png)
+![volume_control_full](./docs/volume_control_full.png)
+![volume_control_muted](./docs/volume_control_muted.png)

@@ -8,3 +8,6 @@ For this NextJs is used as framework with sass and tailwind for styling.
 Using next, the SWC is used for as compiler and postcss is responsable for processing styles.
 
 To control the audio player the react-audio-player is used, but the commands of the player .
+
+Images of the application:
+![1920_image](./docs/print_1920.png)

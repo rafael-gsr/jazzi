@@ -9,7 +9,8 @@ Using next, the SWC is used for as compiler and postcss is responsable for proce
 
 To control the audio player the react-audio-player is used, but the commands of the player .
 
-Images of the application:\
+
+## Images of the application:\
 ![1920_image](./docs/print_1920.png)\
 Full volume:\
 ![volume_control_full](./docs/volume_control_full.png)\
@@ -17,3 +18,7 @@ Half of the volume:\
 ![volume_control](./docs/volume_control.png)\
 Muted:\
 ![volume_control_muted](./docs/volume_control_muted.png)\
+Time progress bar:\
+![time_progress_bar](./docs/time_control.png)\
+Thumbnail:\
+![thumbnail_with_hover](./docs/thumbnail_hover.png)\

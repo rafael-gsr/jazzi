@@ -1,14 +1,19 @@
-# jazzi
-This is a project using next JS that have the purpose to be a music player specialized in the one of the most elegant genders of music, the jazz.
+# Jazzi
 
+This project is built with Next.js and serves as a music player dedicated to one of the most elegant genres of music — jazz.
 
-## Stacks
-For this NextJs is used as framework with sass and tailwind for styling.
+## Tech Stack
 
-Using next, the SWC is used for as compiler and postcss is responsable for processing styles.
+The project uses Next.js as the framework, with Sass and Tailwind CSS for styling.
 
-To control the audio player the react-audio-player is used, but the commands of the player .
+Next.js uses SWC as its compiler, and PostCSS is responsible for processing styles.
 
+To control audio playback, the project uses react-audio-player, which handles the player’s commands.
+
+```
+# Important
+Unfortunately, Vercel doesn’t allow me to host this project on its infrastructure (so sad 😢), but I took a few screenshots to show you how it looks.
+```
 
 ## Images of the application:\
 ![1920_image](./docs/print_1920.png)\

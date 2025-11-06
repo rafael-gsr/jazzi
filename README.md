@@ -13,7 +13,7 @@ To control audio playback, the project uses react-audio-player, which handles th
 > # Important
 > Unfortunately, Vercel doesn’t allow me to host this project on its infrastructure (so sad 😢), but I took a few screenshots to show you how it looks.
 
-## Images of the application:\
+## Images of the application:
 ![1920_image](./docs/print_1920.png)\
 Full volume:\
 ![volume_control_full](./docs/volume_control_full.png)\

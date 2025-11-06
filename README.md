@@ -10,10 +10,8 @@ Next.js uses SWC as its compiler, and PostCSS is responsible for processing styl
 
 To control audio playback, the project uses react-audio-player, which handles the player’s commands.
 
-```
-# Important
-Unfortunately, Vercel doesn’t allow me to host this project on its infrastructure (so sad 😢), but I took a few screenshots to show you how it looks.
-```
+> # Important
+> Unfortunately, Vercel doesn’t allow me to host this project on its infrastructure (so sad 😢), but I took a few screenshots to show you how it looks.
 
 ## Images of the application:\
 ![1920_image](./docs/print_1920.png)\
